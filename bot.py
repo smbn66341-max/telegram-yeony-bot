@@ -1,4 +1,6 @@
 print("4787858")
+from flask import Flask
+from threading import Thread
 import sqlite3
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
 from telegram.ext import Application, CommandHandler, MessageHandler, CallbackQueryHandler, filters, ContextTypes
@@ -365,5 +367,17 @@ app.add_handler(CommandHandler("unblock", unblock_user))
 app.add_handler(CallbackQueryHandler(button_click))
 
 app.add_handler(MessageHandler(filters.ALL, handle_all))
+
+web = Flask(__name__)
+
+@web.route("/")
+def home():
+    return "Bot is alive"
+
+def run_web():
+    port = int(os.environ.get("PORT", 10000))
+    web.run(host="0.0.0.0", port=port)
+
+Thread(target=run_web, daemon=True).start()
 
 app.run_polling()
