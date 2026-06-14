@@ -134,13 +134,15 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     first_name = update.effective_user.first_name
     nickname = get_nickname(user_id)
 
+    username = update.effective_user.username
+
     caption_info = (
         f"👤 کاربر:\n"
         f"نام: {first_name}\n"
         f"اسم نمایشی: {nickname}\n"
+        f"یوزرنیم: @{username if username else 'ندارد'}\n"
         f"ID: {user_id}"
     )
-
     keyboard = InlineKeyboardMarkup([
         [
             InlineKeyboardButton("💬 پاسخ", callback_data=f"reply:{user_id}"),
