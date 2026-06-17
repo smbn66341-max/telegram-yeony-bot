@@ -248,6 +248,59 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 chat_id=admin,
                 text=caption_info
             )
+        #استیکر
+    elif update.message.sticker:
+
+        sticker = update.message.sticker.file_id
+
+        for admin in ADMINS:
+
+            await context.bot.send_sticker(
+                chat_id=admin,
+                sticker=sticker
+            )
+
+            await context.bot.send_message(
+                chat_id=admin,
+                text=caption_info,
+                reply_markup=keyboard
+            )
+    #گیف
+    elif update.message.animation:
+
+        animation = update.message.animation.file_id
+
+        for admin in ADMINS:
+
+            await context.bot.send_animation(
+                chat_id=admin,
+                animation=animation,
+                caption=f"{user_caption}",
+                reply_markup=keyboard
+            )
+
+            await context.bot.send_message(
+                chat_id=admin,
+                text=caption_info
+            )
+    #فایل
+    elif update.message.document:
+
+        document = update.message.document.file_id
+
+        for admin in ADMINS:
+
+            await context.bot.send_document(
+                chat_id=admin,
+                document=document,
+                caption=f"{user_caption}",
+                reply_markup=keyboard
+            )
+
+            await context.bot.send_message(
+                chat_id=admin,
+                text=caption_info
+            )
 
     await update.message.reply_text("ارسال شد.")
 
