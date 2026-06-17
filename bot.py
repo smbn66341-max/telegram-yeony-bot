@@ -143,6 +143,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         f"یوزرنیم: @{username if username else 'ندارد'}\n"
         f"ID: {user_id}"
     )
+    user_caption = update.message.caption or ""
     keyboard = InlineKeyboardMarkup([
         [
             InlineKeyboardButton("💬 پاسخ", callback_data=f"reply:{user_id}"),
@@ -182,7 +183,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await context.bot.send_photo(
                 chat_id=admin,
                 photo=photo,
-                caption="📷 عکس جدید",
+                caption=f"{user_caption}",
                 reply_markup=keyboard
             )
 
@@ -201,7 +202,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await context.bot.send_video(
                 chat_id=admin,
                 video=video,
-                caption="🎥 ویدیو جدید",
+                caption=f"{user_caption}",
                 reply_markup=keyboard
             )
 
@@ -220,7 +221,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await context.bot.send_voice(
                 chat_id=admin,
                 voice=voice,
-                caption="🎤 ویس جدید",
+                caption=f"{user_caption}",
                 reply_markup=keyboard
             )
 
@@ -239,7 +240,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             await context.bot.send_audio(
                 chat_id=admin,
                 audio=audio,
-                caption="🎵 موزیک جدید",
+                caption=f"{user_caption}",
                 reply_markup=keyboard
             )
 
